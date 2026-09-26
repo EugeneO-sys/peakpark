@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Payment - SmartPark KE{% endblock %}
+{% block content %}
+<h1>Collect Payment</h1>
+<div class="receipt">
+    <p><strong>Plate:</strong> {{ session_row.plate_number }}</p>
+    <p><strong>Amount due:</strong> Kshs. {{ session_row.amount_due_kshs }}</p>
+</div>
+
+<form method="post" class="card-form">
+    <label for="method">Payment Method</label>
+    <select id="method" name="method" required>
+        <option value="MPESA">M-Pesa</option>
+        <option value="CARD">Card</option>
+        <option value="CASH">Cash</option>
+    </select>
+
+    <label for="reference">Reference / Till code (optional)</label>
+    <input type="text" id="reference" name="reference" placeholder="e.g. M-Pesa code">
+
+    <button type="submit">Confirm Payment &amp; Open Barrier</button>
+</form>
+{% endblock %}

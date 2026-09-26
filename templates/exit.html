@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Vehicle Exit - SmartPark KE{% endblock %}
+{% block content %}
+
+{% if barrier_open %}
+    <h1>✅ Payment Confirmed &mdash; Barrier Open</h1>
+    <div class="receipt">
+        <p><strong>Plate:</strong> {{ receipt.plate }}</p>
+        <p><strong>Bay released:</strong> {{ receipt.bay_code }}</p>
+        <p><strong>Amount paid:</strong> Kshs. {{ receipt.amount }}</p>
+        <p><strong>Method:</strong> {{ receipt.method }}</p>
+    </div>
+    <a href="{{ url_for('exit_vehicle') }}">Process another exit</a>
+
+{% elif result %}
+    <h1>Amount Due</h1>
+    <div class="receipt">
+        <p><strong>Plate:</strong> {{ result.plate }}</p>
+        <p><strong>Bay:</strong> {{ result.bay_code }}</p>
+        <p><strong>Duration parked:</strong> {{ result.duration }} minutes</p>
+        <p><strong>Amount due:</strong> Kshs. {{ result.fee }}</p>
+    </div>
+    <a class="button" href="{{ url_for('pay', session_id=result.session_id) }}">Proceed to Payment</a>
+
+{% else %}
+    <h1>Vehicle Exit</h1>
+    <form method="post" class="card-form">
+        <label for="plate_number">Number Plate</label>
+        <input type="text" id="plate_number" name="plate_number" placeholder="e.g. KDA 123A" required>
+        <button type="submit">Calculate Duration &amp; Fee</button>
+    </form>
+{% endif %}
+{% endblock %}

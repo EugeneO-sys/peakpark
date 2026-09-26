@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SmartPark KE{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('display_board') }}">🅿️ Peak Park KE</a>
+        <nav>
+            <a href="{{ url_for('display_board') }}">Display Board</a>
+            <a href="{{ url_for('entry') }}">Vehicle Entry</a>
+            <a href="{{ url_for('exit_vehicle') }}">Vehicle Exit</a>
+            <a href="{{ url_for('admin_rates') }}">Admin: Rates</a>
+            <a href="{{ url_for('reports') }}">Reports</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <small>Peak Park &mdash; MMU Data Structures &amp; Algorithms coursework demo.</small>
+    </footer>
+</body>
+</html>

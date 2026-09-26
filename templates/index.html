@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Slot Availability - SmartPark KE{% endblock %}
+{% block content %}
+<meta http-equiv="refresh" content="15">
+<h1>Live Slot Availability</h1>
+<p class="muted">Auto-refreshes every 15 seconds. Also available as JSON at
+    <code>/api/availability</code> for a mobile or external display board.</p>
+
+<div class="board">
+    {% for zone in board %}
+    <div class="zone-card {% if zone.free == 0 %}full{% endif %}">
+        <h2>{{ zone.name }}</h2>
+        <div class="zone-count">{{ zone.free }} / {{ zone.total }}</div>
+        <div class="zone-label">{% if zone.free == 0 %}FULL{% else %}bays free{% endif %}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

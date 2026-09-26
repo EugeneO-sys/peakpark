@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+smartpark.db
+.venv/

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Reports - SmartPark KE{% endblock %}
+{% block content %}
+<h1>Collections &amp; Reconciliation</h1>
+
+<div class="board">
+    <div class="zone-card">
+        <h2>Today</h2>
+        <div class="zone-count">Kshs. {{ total_today }}</div>
+    </div>
+    <div class="zone-card">
+        <h2>All Time</h2>
+        <div class="zone-count">Kshs. {{ total_all }}</div>
+    </div>
+    <div class="zone-card">
+        <h2>VAT ({{ vat_rate }}%) included in all-time total</h2>
+        <div class="zone-count">Kshs. {{ vat_all }}</div>
+    </div>
+</div>
+
+<h2>By Payment Method</h2>
+<table>
+    <thead><tr><th>Method</th><th>Transactions</th><th>Total (Kshs)</th></tr></thead>
+    <tbody>
+        {% for m in by_method %}
+        <tr><td>{{ m.method }}</td><td>{{ m.n }}</td><td>{{ m.total }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Recent Confirmed Payments (audit trail)</h2>
+<table>
+    <thead><tr><th>#</th><th>Plate</th><th>Amount</th><th>Method</th><th>Reference</th><th>Time</th></tr></thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.plate_number }}</td>
+            <td>{{ r.amount_kshs }}</td>
+            <td>{{ r.method }}</td>
+            <td>{{ r.reference or "-" }}</td>
+            <td>{{ r.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

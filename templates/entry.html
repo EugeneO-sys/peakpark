@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Vehicle Entry - SmartPark KE{% endblock %}
+{% block content %}
+<h1>Record Vehicle Arrival</h1>
+<form method="post" class="card-form">
+    <label for="plate_number">Number Plate</label>
+    <input type="text" id="plate_number" name="plate_number" placeholder="e.g. KDA 123A" required>
+
+    <label for="zone_id">Zone</label>
+    <select id="zone_id" name="zone_id" required>
+        {% for zid, name in zones.items() %}
+        <option value="{{ zid }}">{{ name }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Record Entry &amp; Allocate Bay</button>
+</form>
+{% endblock %}
