@@ -1,4 +1,4 @@
-# SmartPark KE
+# PEAKPARK
 
 A modern, web-based parking management system built for Task Two of the
 Multimedia University of Kenya Data Structures & Algorithms coursework.
